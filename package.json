@@ -1,0 +1,21 @@
+{
+  "name": "lowbar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lowbar.js",
+  "scripts": {
+    "test": "mocha ./spec/",
+    "lint": "eslint ./",
+    "posttest": "npm run lint",
+    "precommit": "npm test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.15.0",
+    "husky": "^0.13.1",
+    "mocha": "^3.5.0",
+    "sinon": "^3.3.0"
+  }
+}
