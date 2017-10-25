@@ -161,4 +161,24 @@ describe('_', function () {
       expect(spy.callCount).to.eql(3);
     });
   });
+  describe('#indexOf', () => {
+    it('should be a function', () => {
+      expect(_.indexOf).to.be.a('function');
+    });
+    it('should return the index position of the given value in the given array', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const value = 3;
+      expect(_.indexOf(arr, value)).to.equal(2);
+    });
+    it('should return -1 if the value is not found in the array', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const value = 6;
+      expect(_.indexOf(arr, value)).to.equal(-1);
+    });
+    it('should utilise binary search methods methods if a is sorted argument is passed', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const value = 3;
+      expect(_.indexOf(arr, value, true)).to.equal(2);
+    });
+  });
 });
