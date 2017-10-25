@@ -120,4 +120,10 @@ _.contains = (list, value, fromIndex) => {
   return false;
 };
 
+_.pluck = (list, propertyName) => {
+  return _.map(list, (obj) => {
+    return obj[propertyName];
+  });
+};
+
 module.exports = _;
