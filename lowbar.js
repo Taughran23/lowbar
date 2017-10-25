@@ -126,4 +126,21 @@ _.pluck = (list, propertyName) => {
   });
 };
 
+_.reduce = (list, iteritee, memo, context) => {
+  if (list.length === 0) memo = 0;
+  if (Object.keys(list).length === 0 && list.constructor === Object) {
+    memo = 0;
+  }
+  _.each(list, (value, index) => {
+    if (memo === undefined) {
+      memo = value;
+      iteritee(memo, value, index, list);
+    } else {
+      memo = iteritee(memo, value, index, list);
+    }
+  }, context);
+
+  return memo;
+};
+
 module.exports = _;
