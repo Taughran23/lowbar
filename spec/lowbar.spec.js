@@ -424,4 +424,38 @@ describe('_', function () {
       expect(_.reduce(list, func)).to.equal(0);
     });
   });
+  describe('#every',() => {
+    it('should be a function',()=> {
+      expect(_.every).to.be.a('function');
+    });
+    it('should return true if all the elements in the list pass the predicate truth test',() => {
+      const list = [2,4,6,8,10];
+      const func = (num) => {
+        return num % 2 === 0;
+      };
+      expect(_.every(list, func)).to.equal(true);
+    });
+    it('should work with objects', () => {
+      const list = {'10':10,'12':12,'14':14,'16':16};
+      const func = (num) => {
+        return num % 2 === 0;
+      };
+      expect(_.every(list, func)).to.equal(true);
+    });
+    it('should return false if one element does not pass the truth test', () => {
+      const list = {'10':10,'13':13,'14':14,'16':16};
+      const func = (num) => {
+        return num % 2 === 0;
+      };
+      expect(_.every(list, func)).to.equal(false);
+    });
+    it('should bind the context object to the predicate if one is passed', ()=> {
+      const list = [2,4,6,8,10];
+      const func = (num) => {
+        return num % context.two === 0;
+      };
+      const context = {'two': 2};
+      expect(_.every(list, func, context)).to.equal(true);
+    });
+  });
 });
