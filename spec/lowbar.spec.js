@@ -181,4 +181,47 @@ describe('_', function () {
       expect(_.indexOf(arr, value, true)).to.equal(2);
     });
   });
+  describe('#filter', () => {
+    it('should be a function', () => {
+      expect(_.filter).to.be.a('function');
+    });
+    it('should return an array of elements that resolved true when passed to the predicate function', () => {
+      const list = [1, 2, 3, 4, 5];
+      const func = (num) => {
+        return num % 2 === 0;
+      };
+      expect(_.filter(list, func)).to.eql([2, 4]);
+    });
+    it('should handle objects as well as arrays', () => {
+      const list = {
+        'one': 1,
+        'two': 2,
+        'three': 3,
+        'four': 4,
+        'five': 5
+      };
+      const func = (num) => {
+        return num % 2 === 0;
+      };
+      expect(_.filter(list, func)).to.eql([2, 4]);
+    });
+    it('should return an empty array when passed an empty array', () => {
+      const arr = [];
+      const func = (num) => {
+        return num % 2 === 0;
+      };
+      expect(_.filter(arr, func)).to.eql([]);
+    });
+    it('should bind the predicate to the context object when one is passed', () => {
+      const list = [1, 2, 3, 4, 5];
+      const func = (num) => {
+        return num % 2 === 0 && num % context.four !== 0;
+      };
+      const context = {
+        'four': 4
+      };
+      const result = _.filter(list, func, context);
+      expect(result).to.eql([2]);
+    });
+  });
 });
