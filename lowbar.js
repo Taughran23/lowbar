@@ -98,4 +98,15 @@ _.uniq = (arr) => {
   return result;
 };
 
+_.map = (list, iteritee, context) => {
+  const result = [];
+  if (typeof iteritee !== 'function') {
+    iteritee = () => undefined;
+  }
+  _.each(list, (value, index, arr) => {
+    result.push(iteritee(value, index, arr));
+  }, context);
+  return result;
+};
+
 module.exports = _;
