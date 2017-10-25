@@ -314,4 +314,29 @@ describe('_', function () {
       expect(_.map([1, 2, 3], 2)).to.eql([undefined, undefined, undefined]);
     });
   });
+  describe('#contains', () => {
+    it('should be a function', () => {
+      expect(_.contains).to.be.a('function');
+    });
+    it('should return true if the given value can be found in the given list', () => {
+      expect(_.contains([1, 2, 3, 4, 5], 1)).to.equal(true);
+    });
+    it('should return false if the given value can not be found in the given list', () => {
+      expect(_.contains([1, 2, 3, 4, 5], 6)).to.equal(false);
+    });
+    it('should work for objects as well as arrays', () => {
+      const list = {
+        '1': 10,
+        '2': 20,
+        '3': 30
+      };
+      expect(_.contains(list, 10)).to.equal(true);
+    });
+    it('should start the search from a specified index if one is passed', () => {
+      const list = [1, 2, 3];
+      const value = 1;
+      const fromIndex = 1;
+      expect(_.contains(list, value, fromIndex)).to.equal(false);
+    });
+  });
 });
