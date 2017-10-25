@@ -37,4 +37,29 @@ _.each = (list, func, context) => {
   return list;
 };
 
+_.indexOf = (arr, value, isSorted) => {
+  isSorted = isSorted || false;
+  if (isSorted) {
+    let first = 0,
+      last = arr.length - 1,
+      mid;
+    while (first <= last) {
+      mid = Math.floor((first + last) / 2);
+      if (arr[mid] < value) {
+        first = mid + 1;
+      } else if (arr[mid] > value) {
+        last = mid - 1;
+      } else {
+        return mid;
+      }
+    }
+    return -1;
+  }
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === value) return i;
+  }
+  return -1;
+};
+
+
 module.exports = _;
