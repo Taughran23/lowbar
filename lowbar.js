@@ -80,4 +80,12 @@ _.filter = (list, predicate, context) => {
   return result;
 };
 
+_.reject = (list, predicate, context) => {
+  const result = [];
+  _.each(list, (value, index, obj) => {
+    if (!predicate(value, index, obj)) result.push(value);
+  }, context);
+  return result;
+};
+
 module.exports = _;
