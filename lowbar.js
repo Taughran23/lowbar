@@ -88,4 +88,14 @@ _.reject = (list, predicate, context) => {
   return result;
 };
 
+_.uniq = (arr) => {
+  const result = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (_.indexOf(result, arr[i]) === -1) {
+      result.push(arr[i]);
+    }
+  }
+  return result;
+};
+
 module.exports = _;
