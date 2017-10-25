@@ -61,5 +61,23 @@ _.indexOf = (arr, value, isSorted) => {
   return -1;
 };
 
+_.filter = (list, predicate, context) => {
+  const result = [];
+  if (context) predicate.bind(context);
+  if (Array.isArray(list)) {
+    for (let i = 0; i < list.length; i++) {
+      if (predicate(list[i])) {
+        result.push(list[i]);
+      }
+    }
+  } else {
+    for (let key in list) {
+      if (predicate(list[key])) {
+        result.push(list[key]);
+      }
+    }
+  }
+  return result;
+};
 
 module.exports = _;
