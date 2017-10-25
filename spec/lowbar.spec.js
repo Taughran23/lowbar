@@ -1,5 +1,6 @@
 const path = require('path');
 const expect = require('chai').expect;
+const sinon = require('sinon');
 
 const _ = require(path.join(__dirname, '..', './lowbar.js'));
 
@@ -91,6 +92,73 @@ describe('_', function () {
     it('should round up n if given a decimal number', () => {
       const result = _.last([1, 2, 3, 4, 5], 3.5);
       expect(result).to.eql([2, 3, 4, 5]);
+    });
+  });
+  describe('#each', () => {
+    it('should be a function', () => {
+      expect(_.each).to.be.a('function');
+    });
+    it('should pass each element in an array to an iteratee function', () => {
+      const result = [];
+      const arr = [1, 2, 3, 4, 5];
+      const func = (num) => {
+        result.push(num);
+      };
+      _.each(arr, func);
+      expect(result).to.eql(arr);
+    });
+    it('should pass each element in an object to an iteratee function', () => {
+      const result = [];
+      const obj = {
+        'one': 1,
+        'two': 2,
+        'three': 3
+      };
+      const func = (num) => {
+        result.push(num);
+      };
+      _.each(obj, func);
+      expect(result.length).to.equal(3);
+    });
+    it('should bind the context to the iteritee function if one is passed', () => {
+      const result = [];
+      const list = [1, 2, 3];
+      const func = () => {
+        result.push(context.name);
+      };
+      const context = {
+        'name': 'Dave Benson-Philips'
+      };
+      _.each(list, func, context);
+      expect(result).to.eql(['Dave Benson-Philips', 'Dave Benson-Philips', 'Dave Benson-Philips']);
+    });
+    it('should call the function with the array element and index', () => {
+      const result = [];
+      const list = [1, 2, 3];
+      const func = (element, index) => {
+        result.push(element, index);
+      };
+      _.each(list, func);
+      expect(result).to.eql([1, 0, 2, 1, 3, 2]);
+    });
+    it('should call the function with the object value and key', () => {
+      const result = [];
+      const list = {
+        'one': 1,
+        'two': 2,
+        'three': 3
+      };
+      const func = (value, key) => {
+        result.push(value, key);
+      };
+      _.each(list, func);
+      expect(result).to.eql([1, 'one', 2, 'two', 3, 'three']);
+    });
+    it('should pass all elements to the iteritee function', () => {
+      const spy = sinon.spy();
+      const list = [1, 2, 3];
+      _.each(list, spy);
+      expect(spy.callCount).to.eql(3);
     });
   });
 });
