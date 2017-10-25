@@ -62,4 +62,35 @@ describe('_', function () {
       ]);
     });
   });
+  describe('#last', () => {
+    it('should be as function', () => {
+      expect(_.last).to.be.a('function');
+    });
+    it('should return undefined if not passed an array', () => {
+      const result = _.last({
+        'last': 1
+      });
+      expect(result).to.equal(undefined);
+    });
+    it('should return undefined if the array has the length of zero', () => {
+      const result = _.last([]);
+      expect(result).to.equal(undefined);
+    });
+    it('should return the last element of an array when passed one argument', () => {
+      const result = _.last([1, 2, 3, 4, 5]);
+      expect(result).to.equal(5);
+    });
+    it('should return the last n elements of an array when the second argument passed is a number', () => {
+      const result = _.last([1, 2, 3, 4, 5], 2);
+      expect(result).to.eql([4, 5]);
+    });
+    it('should return an empty array if the second argument is not a number', () => {
+      const result = _.last([1, 2, 3, 4, 5], 'hello');
+      expect(result).to.eql([]);
+    });
+    it('should round up n if given a decimal number', () => {
+      const result = _.last([1, 2, 3, 4, 5], 3.5);
+      expect(result).to.eql([2, 3, 4, 5]);
+    });
+  });
 });
