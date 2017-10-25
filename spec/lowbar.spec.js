@@ -275,4 +275,43 @@ describe('_', function () {
       expect(_.uniq(arr)).to.eql([1, 2, 3, 4, 5]);
     });
   });
+  describe('#map', () => {
+    it('should be a function', () => {
+      expect(_.map).to.be.a('function');
+    });
+    it('should return a new array of elements modified by the iteritee function when passed an array', () => {
+      const list = [1, 2, 3, 4, 5];
+      const func = (num) => {
+        return num * 2;
+      };
+      expect(_.map(list, func)).to.eql([2, 4, 6, 8, 10]);
+    });
+    it('should return a new array of elements modified by the iteritee function when passed an object', () => {
+      const list = {
+        'one': 1,
+        'two': 2,
+        'three': 3,
+        'four': 4,
+        'five': 5
+      };
+      const func = (num) => {
+        return Math.pow(num, 2);
+      };
+      expect(_.map(list, func)).to.eql([1, 4, 9, 16, 25]);
+    });
+    it('should bind the iteritee function to the context object if one is passed', () => {
+      const list = [3, 6, 9, 12, 15];
+      const func = (num) => {
+        return num / context.three;
+      };
+      const context = {
+        'three': 3
+      };
+      const result = _.map(list, func, context);
+      expect(result).to.eql([1, 2, 3, 4, 5]);
+    });
+    it('should return and array filled by undefineds if the second argumnet is not a function', () => {
+      expect(_.map([1, 2, 3], 2)).to.eql([undefined, undefined, undefined]);
+    });
+  });
 });
