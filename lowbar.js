@@ -109,4 +109,15 @@ _.map = (list, iteritee, context) => {
   return result;
 };
 
+_.contains = (list, value, fromIndex) => {
+  if (!Array.isArray(list)) {
+    list = Object.values(list);
+  }
+  if (Number.isInteger(fromIndex)) {
+    list = list.splice(fromIndex, list.length);
+  }
+  if (_.indexOf(list, value) !== -1) return true;
+  return false;
+};
+
 module.exports = _;
