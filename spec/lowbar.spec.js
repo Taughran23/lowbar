@@ -339,4 +339,37 @@ describe('_', function () {
       expect(_.contains(list, value, fromIndex)).to.equal(false);
     });
   });
+  describe('#pluck', () => {
+    it('should be a function', () => {
+      expect(_.pluck).to.be.a('function');
+    });
+    it('should return an array of the requested properties', () => {
+      const list = [{
+        'fName': 'Dave',
+        'lName': 'Benson-Phillips'
+      },
+      {
+        'fName': 'Pat',
+        'lName': 'Sharp'
+      }
+      ];
+      const propertyName = 'lName';
+      expect(_.pluck(list, propertyName)).to.eql(['Benson-Phillips', 'Sharp']);
+    });
+    it('should return an empty array when passed an empty array as the fist argument', () => {
+      expect(_.pluck([], 'hello')).to.eql([]);
+    });
+    it('should return undefined if not passed a correct property name as the second argument', () => {
+      const list = [{
+        'fName': 'Dave',
+        'lName': 'Benson-Phillips'
+      },
+      {
+        'fName': 'Pat',
+        'lName': 'Sharp'
+      }
+      ];
+      expect(_.pluck(list, 'name')).to.eql([undefined,undefined]);
+    });
+  });
 });
