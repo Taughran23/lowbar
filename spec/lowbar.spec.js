@@ -224,4 +224,40 @@ describe('_', function () {
       expect(result).to.eql([2]);
     });
   });
+  describe('#reject', () => {
+    it('should be a function', () => {
+      expect(_.reject).to.be.a('function');
+    });
+    it('should return an array of elements that resolved false when passed to the predicate function', () => {
+      const list = [1, 2, 3, 4, 5];
+      const func = (num) => {
+        return num % 3 === 0;
+      };
+      expect(_.reject(list, func)).to.eql([1, 2, 4, 5]);
+    });
+    it('should work with objects', () => {
+      const list = {
+        'one': 1,
+        'two': 2,
+        'three': 3,
+        'four': 4,
+        'five': 5
+      };
+      const func = (num) => {
+        return num % 3 === 0;
+      };
+      expect(_.reject(list, func)).to.eql([1, 2, 4, 5]);
+    });
+    it('should bind the predicate to the context object if one is passed', () => {
+      const list = [1, 2, 3, 4, 5];
+      const func = (num) => {
+        return num % context.three === 0;
+      };
+      const context = {
+        'three': 3
+      };
+      const result = _.reject(list, func, context);
+      expect(result).to.eql([1, 2, 4, 5]);
+    });
+  });
 });
