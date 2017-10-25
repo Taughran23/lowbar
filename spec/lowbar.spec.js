@@ -372,4 +372,56 @@ describe('_', function () {
       expect(_.pluck(list, 'name')).to.eql([undefined,undefined]);
     });
   });
+  describe('#reduce', () => {
+    it('should be a function', () => {
+      expect(_.reduce).to.be.a('function');
+    });
+    it('should boil down a list of values into a single value',() => {
+      const list = [1,2,3,4,5];
+      const memo = 0;
+      const func = (memo,num) => {
+        return memo += num;
+      };
+      expect(_.reduce(list, func, memo)).to.equal(15);
+    });
+    it('should work for objects',() => {
+      const list = {'1':1,'2':2,'3':3};
+      const memo = 0;
+      const func = (memo,num) => {
+        return memo += num;
+      };
+      expect(_.reduce(list, func, memo)).to.equal(6);
+    });
+    it('should bind the context object to the itritee function if one is passed',() => {
+      const list = {'1':1,'2':2,'3':3};
+      const memo = 0;
+      const func = (memo) => {
+        return memo += context.num;
+      };
+      const context = {'num': 5};
+      const result = _.reduce(list, func, memo, context);
+      expect(result).to.equal(15);
+    });
+    it('should default to the first element if a memo is not passed',()=> {
+      const list = [10,20,30,40];
+      const func = (memo, num) => {
+        return memo += num;
+      };
+      expect(_.reduce(list, func)).to.equal(100);
+    });
+    it('should return 0 when passed an empty array', ()=> {
+      const list = [];
+      const func = (memo, num) => {
+        return memo += num;
+      };
+      expect(_.reduce(list, func)).to.equal(0);
+    });
+    it('should return 0 when passed an empty object', ()=> {
+      const list = {};
+      const func = (memo, num) => {
+        return memo += num;
+      };
+      expect(_.reduce(list, func)).to.equal(0);
+    });
+  });
 });
