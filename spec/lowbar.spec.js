@@ -260,4 +260,19 @@ describe('_', function () {
       expect(result).to.eql([1, 2, 4, 5]);
     });
   });
+  describe('#uniq', () => {
+    it('should be a function', () => {
+      expect(_.uniq).to.be.a('function');
+    });
+    it('should return an empty array if passed an empty array', () => {
+      expect(_.uniq([])).to.eql([]);
+    });
+    it('should retrun an empty array if not passed an array', () => {
+      expect(_.uniq(123)).to.eql([]);
+    });
+    it('should return an array without any duplicated elements', () => {
+      const arr = [1, 1, 1, 2, 3, 4, 5, 5];
+      expect(_.uniq(arr)).to.eql([1, 2, 3, 4, 5]);
+    });
+  });
 });
