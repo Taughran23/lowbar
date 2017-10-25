@@ -143,4 +143,19 @@ _.reduce = (list, iteritee, memo, context) => {
   return memo;
 };
 
+_.every = (list, predicate, context) => {
+  if (context) predicate = predicate.bind(context);
+  if (Array.isArray(list)) {
+    for (let i = 0; i < list.length; i++) {
+      if (!predicate(list[i])) return false;
+    }
+    return true;
+  } else {
+    for (let key in list) {
+      if (!predicate(list[key])) return false;
+    }
+    return true;
+  }
+};
+
 module.exports = _;
