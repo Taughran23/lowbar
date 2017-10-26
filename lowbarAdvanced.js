@@ -55,4 +55,12 @@ _.sortBy = function (list, func, context) {
   return list.sort((a, b) => a[func] - b[func]);
 };
 
+_.zip = function () {
+  const args = [].slice.call(arguments)
+    .sort((a, b) => b.length - a.length);
+  return __.map(Object.keys(args[0]), (i) => {
+    return __.map(args, (arr) => arr[i]);
+  });
+};
+
 module.exports = _; 
