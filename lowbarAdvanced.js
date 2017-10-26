@@ -80,4 +80,18 @@ _.sortedIndex = (list, value, iteratee, context) => {
   return low;
 };
 
+_.flatten = (list) => {
+  if (!Array.isArray(list)) return [];
+  const result = [];
+
+  __.each(list, element => {
+    if (Array.isArray(element)) {
+      result.push(..._.flatten(element));
+    } else {
+      result.push(element);
+    }
+  });
+  return result;
+};
+
 module.exports = _; 
