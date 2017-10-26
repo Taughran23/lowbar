@@ -181,5 +181,31 @@ describe.only('_', () => {
       });
     });
   });
+  describe('#zip', () => {
+    it('should be a function', () => {
+      expect(_.zip).to.be.a('function');
+    });
+    it('should merge together the values of each of the arrays with the values at the corrsponding postion', () => {
+      expect(_.zip(['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false])).to.eql([
+        ['moe', 30, true],
+        ['larry', 40, false],
+        ['curly', 50, false]
+      ]);
+    });
+    it('should return an undefined value if there is not a corrasponding element in a passed array', () => {
+      expect(_.zip([1, 2, 3], [10, 20])).to.eql([
+        [1, 10],
+        [2, 20],
+        [3, undefined]
+      ]);
+    });
+    it('should retain all present elements if the first array is shorter than the others', () => {
+      expect(_.zip([1, 2], [10, 20, 30])).to.eql([
+        [10, 1],
+        [20, 2],
+        [30, undefined]
+      ]);
+    });
+  });
 });
 
