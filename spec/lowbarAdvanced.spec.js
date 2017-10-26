@@ -232,5 +232,17 @@ describe.only('_', () => {
       expect(_.sortedIndex(list, value, func, context)).to.equal(1);
     });
   });
+  describe('#flatten', () => {
+    it('should be a function', () => {
+      expect(_.flatten).to.be.a('function');
+    });
+    it('should take a nested array and return a non-nested one', () => {
+      const list = [1, [2, 3, [4]], 5];
+      expect(_.flatten(list)).to.eql([1, 2, 3, 4, 5]);
+    });
+    it('should retrun an empty array if not passed an array', () => {
+      expect(_.flatten(5)).to.eql([]);
+    });
+  });
 });
 
