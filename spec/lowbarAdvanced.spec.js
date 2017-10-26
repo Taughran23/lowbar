@@ -265,5 +265,22 @@ describe.only('_', () => {
       expect(_.intersection({'1':'one'})).to.eql([]);
     });
   });
+  describe('#difference', () => {
+    it('should be a function', () => {
+      expect(_.difference).to.be.a('function');
+    });
+    it('should return some arguments', () => {
+      expect(_.difference([1, 2, 3, 4, 5], [5, 2, 10])).to.eql([1, 3, 4]);
+    });
+    it('should return an empty array if passed a primitive value as the first argument', () => {
+      expect(_.difference(1,[1,2,3],[4,5,6])).to.eql([]);
+    });
+    it('should return an array of object values if passed an object', ()=> {
+      expect(_.difference({'1':'hello','2':'world'},[1,2,3],[4,5,6])).to.eql(['hello','world']);
+    });
+    it('should retrun the original array if passed an object as the second argument',() => {
+      expect(_.difference([1,2,3],{'1':'hello','2':'world'})).to.eql([1, 2, 3]);
+    });
+  });
 });
 
