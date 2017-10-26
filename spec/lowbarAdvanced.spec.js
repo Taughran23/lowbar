@@ -139,5 +139,47 @@ describe.only('_', () => {
       expect(_.invoke([1, 2, 3])).to.eql([undefined, undefined, undefined]);
     });
   });
+  describe('#sortBy', () => {
+    it('should be a function', () => {
+      expect(_.sortBy).to.be.a('function');
+    });
+    it('should sort the given list by the return value of the iteritee function', () => {
+      const list = [1, 2, 3, 4, 5, 6];
+      const func = function (num) {
+        return Math.sin(num);
+      };
+      expect(_.sortBy(list, func)).to.eql([5, 4, 6, 3, 1, 2]);
+    });
+    it('should work with objects', () => {
+      const list = [{
+        name: 'moe',
+        age: 60
+      }, {
+        name: 'larry',
+        age: 50
+      }, {
+        name: 'curly',
+        age: 40
+      }];
+      expect(_.sortBy(list, 'age')).to.eql([{
+        name: 'curly',
+        age: 40
+      }, {
+        name: 'larry',
+        age: 50
+      }, {
+        name: 'moe',
+        age: 60
+      }]);
+      it('should bind the iteritee function to the context object if one is passed', () => {
+        const list = [1, 2, 3, 4, 5, 6];
+        const func = (num) => context.math(num);
+        const context = {
+          'math': (num) => Math.sin(num)
+        };
+        expect(_.sortBy(list, func, context)).to.eql([5, 4, 6, 3, 1, 2]);
+      });
+    });
+  });
 });
 
