@@ -21,4 +21,17 @@ _.memoize = (func, hashFunc) => {
   return memo;
 };
 
+_.shuffle = (list) => {
+  if (!Array.isArray(list)) list = Object.values(list);
+  const newList = list.slice(),
+    result = [];
+  let listLength = newList.length;
+  for (let i = 0; i < newList.length; i++) {
+    let randomIndex = Math.floor(Math.random() * listLength);
+    result.push(newList[randomIndex]);
+    listLength--;
+  }
+  return result;
+};
+
 module.exports = _; 
