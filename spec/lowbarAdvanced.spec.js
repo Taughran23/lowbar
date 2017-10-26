@@ -207,5 +207,30 @@ describe.only('_', () => {
       ]);
     });
   });
+  describe('#sortedIndex', () => {
+    it('should be a function', () => {
+      expect(_.sortedIndex).to.be.a('function');
+    });
+    it('should return the index that the value should be inserted in to maintain the sorted order', () => {
+      const list = [1, 2, 3, 4, 5];
+      const value = 3.5;
+      expect(_.sortedIndex(list, value)).to.equal(3);
+    });
+    it('should compute the sort ranking of each element including the value passed using the iteratee if passed one', () => {
+      const list = [1, 2, 3, 4, 5];
+      const value = 3.5;
+      const func = (num) => num += 1;
+      expect(_.sortedIndex(list, value, func)).to.equal(3);
+    });
+    it('should bind the iteratee to the context object if one is passed', () => {
+      const list = [10, 20, 30, 40, 50];
+      const value = 15;
+      const func = (num) => num / context.ten;
+      const context = {
+        'ten': 10
+      };
+      expect(_.sortedIndex(list, value, func, context)).to.equal(1);
+    });
+  });
 });
 
