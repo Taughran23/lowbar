@@ -47,4 +47,12 @@ _.invoke = function (list, method) {
   });
 };
 
+_.sortBy = function (list, func, context) {
+  if (context) func = func.bind(context);
+  if (typeof func === 'function') {
+    return list.sort((a, b) => func(a) - func(b));
+  }
+  return list.sort((a, b) => a[func] - b[func]);
+};
+
 module.exports = _; 
