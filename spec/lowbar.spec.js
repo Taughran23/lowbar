@@ -510,4 +510,22 @@ describe('_', function () {
       expect(_.extends(obj1, obj2)).to.eql({'name': 'Lez','age':52});
     });
   });
+  describe('#defaults',()=> {
+    it('should be a function',()=> {
+      expect(_.defaults).to.be.a('function');
+    });
+    it('should fill in any undefined properties in a target object with the first value present in the following list of default object',()=> {
+      const iceCream1 = {'flavor': 'chocolate'};
+      const iceCream2 = {'flavor': 'vanilla', 'sprinkles': 'lots'};
+      expect(_.defaults(iceCream1,iceCream2)).to.eql({'flavor': 'chocolate', 'sprinkles': 'lots'});
+    });
+    it('should return the target object when not passed the defaults argument', () => {
+      expect(_.defaults({'flavor': 'chocolate'})).to.eql({'flavor': 'chocolate'});
+    });
+    it('should not replace existing keys',()=> {
+      const league1 = {'team': 'Boston Celtics'};
+      const league2 = {'team': 'L.A Lakers'};
+      expect(_.defaults(league1,league2)).to.eql(league1);
+    });
+  });
 });
