@@ -94,4 +94,21 @@ _.flatten = (list) => {
   return result;
 };
 
+_.intersection = function () {
+  const args = [].slice.call(arguments);
+  if(!Array.isArray(args[0])) return [];
+  if(Array.isArray(args[0]) && args[0].length === 0) return [];
+
+  return __.reduce(args[0], (acc, ele) => {
+    let common = false;
+    for (let i = 1; i < args.length; i++) {
+      __.each(args[i], (element) => {
+        if (ele === element) common = true;
+      });
+    }
+    if (common) acc.push(ele);
+    return acc;
+  }, []);
+};
+
 module.exports = _; 
