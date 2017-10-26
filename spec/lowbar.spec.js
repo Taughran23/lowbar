@@ -492,4 +492,22 @@ describe('_', function () {
       expect(_.some(list, func, context)).to.equal(true);
     });
   });
+  describe('#extends',() => {
+    it('should be a function',() => {
+      expect(_.extends).to.be.a('function');
+    });
+    it('should shallow copy all the properties in the source objects to the destination object and return it',() => {
+      const obj1 = {'name': 'Lez'};
+      const obj2 = {'age': 52};
+      expect(_.extends(obj1, obj2)).to.eql({'name': 'Lez','age': 52});
+    });
+    it('should return the destination object if no source is passed',()=> {
+      expect(_.extends({'name': 'Lez'})).to.eql({'name': 'Lez'});
+    });
+    it('should update the destination object if the source object has the same key',()=> {
+      const obj1 = {'name': 'Lez','age':12};
+      const obj2 = {'age': 52};
+      expect(_.extends(obj1, obj2)).to.eql({'name': 'Lez','age':52});
+    });
+  });
 });
