@@ -62,5 +62,39 @@ describe.only('_', () => {
       });
     });
   });
+  describe('#shuffle', () => {
+    it('should be a function', () => {
+      expect(_.shuffle).to.be.a('function');
+    });
+    it('should return an array of the same length as the passed array', () => {
+      const list = [1, 2, 3, 4, 5];
+      expect(_.shuffle(list).length).to.equal(5);
+    });
+    it('should return an array with the same elements but in different index positions', () => {
+      const list = [5, 10, 15, 20];
+      const result = _.shuffle(list);
+      expect(result).to.not.eql(list);
+    });
+    it('should work with objects', () => {
+      const list = {
+        '1': 1,
+        '2': 2,
+        '3': 3
+      };
+      const result = _.shuffle(list);
+      expect(result).to.not.eql(list);
+    });
+    it('should return a empty array if passed a number', () => {
+      expect(_.shuffle(3)).to.eql([]);
+    });
+    it('should return an array when passed a string', () => {
+      const result = Array.isArray(_.shuffle('hello'));
+      expect(result).to.equal(true);
+    });
+    it('should return an array of shuffled letters when passed a string', () => {
+      const result = _.shuffle('world');
+      expect(result).to.not.equal(['w', 'o', 'r', 'l', 'd']);
+    });
+  });
 });
 
