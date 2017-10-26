@@ -244,5 +244,26 @@ describe.only('_', () => {
       expect(_.flatten(5)).to.eql([]);
     });
   });
+  describe('#intersection', () => {
+    it('should be a function', () => {
+      expect(_.intersection).to.be.a('function');
+    });
+    it('should return an array of the common elements of the passed arrays', () => {
+      expect(_.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1])).to.eql([1, 2]);
+    });
+    it('should return an empty array of passed a primitive value', () => {
+      expect(_.intersection(5)).to.eql([]);
+      expect(_.intersection('hello')).to.eql([]);
+      expect(_.intersection(null)).to.eql([]);
+      expect(_.intersection(undefined)).to.eql([]);
+      expect(_.intersection(true)).to.eql([]);
+    });
+    it('should return an empty array if passed an empty array', ()=> {
+      expect(_.intersection([])).to.eql([]);
+    });
+    it('should return an empty array if passed an object', ()=> {
+      expect(_.intersection({'1':'one'})).to.eql([]);
+    });
+  });
 });
 
