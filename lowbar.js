@@ -158,4 +158,19 @@ _.every = (list, predicate, context) => {
   }
 };
 
+_.some = (list, predicate, context) => {
+  if (context) predicate = predicate.bind(context);
+  if (Array.isArray(list)) {
+    for (let i = 0; i < list.length; i++) {
+      if (predicate(list[i])) return true;
+    }
+    return false;
+  } else {
+    for (let key in list) {
+      if (predicate(list[key])) return true;
+    }
+    return false;
+  }
+};
+
 module.exports = _;
