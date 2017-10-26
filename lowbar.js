@@ -177,4 +177,8 @@ _.extends = (destination, source) => {
   return Object.assign({},destination, source);
 };
 
+_.defaults = (obj, defaults) => {
+  return Object.assign({},defaults, obj);
+};
+
 module.exports = _;
