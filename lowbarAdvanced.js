@@ -1,3 +1,6 @@
+const path = require('path');
+const __ = require(path.join(__dirname, './lowbar.js'));
+
 const _ = {};
 
 _.once = (func) => {
@@ -32,6 +35,16 @@ _.shuffle = (list) => {
     listLength--;
   }
   return result;
+};
+
+_.invoke = function (list, method) {
+  const args = [].slice.call(arguments, 2);
+
+  const isFunc = typeof method === 'function';
+  return __.map(list, function (value) {
+    const fn = isFunc ? method : value[method];
+    return fn == null ? fn : fn.apply(value, args);
+  });
 };
 
 module.exports = _; 
