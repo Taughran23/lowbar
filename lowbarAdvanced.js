@@ -111,4 +111,18 @@ _.intersection = function () {
   }, []);
 };
 
+_.difference = function(array){
+  const others = [].slice.call(arguments, 1);
+  return __.reduce(array, (acc, ele) => {
+    let common = false;
+    for (let i = 0; i < others.length; i++) {
+      __.each(others[i], (element) => {
+        if (ele === element) common = true;
+      });
+    }
+    if (!common) acc.push(ele);
+    return acc;
+  },[]);
+};
+
 module.exports = _; 
