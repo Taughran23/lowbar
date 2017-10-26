@@ -63,4 +63,21 @@ _.zip = function () {
   });
 };
 
+_.sortedIndex = (list, value, iteratee, context) => {
+  if (!iteratee) iteratee = __.identity;
+  else value = iteratee(value);
+  if (context) iteratee.bind(context);
+  if (!Array.isArray(list)) 0;
+
+  let low = 0,
+    high = list.length;
+
+  while (low < high) {
+    let mid = Math.floor((low + high) / 2);
+    if (iteratee(list[mid]) < value) low = mid + 1;
+    else high = mid;
+  }
+  return low;
+};
+
 module.exports = _; 
