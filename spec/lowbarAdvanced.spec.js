@@ -96,5 +96,48 @@ describe.only('_', () => {
       expect(result).to.not.equal(['w', 'o', 'r', 'l', 'd']);
     });
   });
+  describe('#invoke', () => {
+    it('should be a function', () => {
+      expect(_.invoke).to.be.a('function');
+    });
+    it('should call the method on item in the list', () => {
+      const list = [
+        [5, 1, 7],
+        [3, 2, 1]
+      ];
+      const func = 'sort';
+      expect(_.invoke(list, func)).to.eql([
+        [1, 5, 7],
+        [1, 2, 3]
+      ]);
+    });
+    it('should work for objects', () => {
+      const list = {
+        '1': 1,
+        '2': 2,
+        '3': 3
+      };
+      const func = 'toString';
+      expect(_.invoke(list, func)).to.eql(['1', '2', '3']);
+    });
+    it('should handle a third argument that should be passed to the method', () => {
+      const list = [
+        ['Barry', 'Paul'],
+        ['Laurel', 'Hardy']
+      ];
+      const func = 'join';
+      const arg = ' and ';
+      expect(_.invoke(list, func, arg)).to.eql(['Barry and Paul', 'Laurel and Hardy']);
+    });
+    it('should return an empty array if passed a number as the first argument', () => {
+      expect(_.invoke(1, 'sort')).to.eql([]);
+    });
+    it('should return an empty array if passed a string', () => {
+      expect(_.invoke('no', 'sort')).to.eql([undefined, undefined]);
+    });
+    it('should return undefined if not passed the method argument', () => {
+      expect(_.invoke([1, 2, 3])).to.eql([undefined, undefined, undefined]);
+    });
+  });
 });
 
