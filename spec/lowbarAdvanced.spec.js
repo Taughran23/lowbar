@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const _ = require(path.join(__dirname, '..', './lowbarAdvanced.js'));
 
-describe.only('_', () => {
+describe('_', () => {
   'use strict';
 
   it('is an object', () => {
